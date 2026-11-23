@@ -24,30 +24,70 @@
 
     <ul class="works" aria-label="Works">
       <li class="works__item">
-        <a class="works__link" href="#">
+        <button class="works__link" type="button" popovertarget="case-1">
           <span class="placeholder works__image"></span>
           <span class="visually-hidden">Project 1</span>
-        </a>
+        </button>
       </li>
       <li class="works__item">
-        <a class="works__link" href="#">
+        <button class="works__link" type="button" popovertarget="case-2">
           <span class="placeholder works__image"></span>
           <span class="visually-hidden">Project 2</span>
-        </a>
+        </button>
       </li>
       <li class="works__item">
-        <a class="works__link" href="#">
+        <button class="works__link" type="button" popovertarget="case-3">
           <span class="placeholder works__image"></span>
           <span class="visually-hidden">Project 3</span>
-        </a>
+        </button>
       </li>
       <li class="works__item">
-        <a class="works__link" href="#">
+        <button class="works__link" type="button" popovertarget="case-4">
           <span class="placeholder works__image"></span>
           <span class="visually-hidden">Project 4</span>
-        </a>
+        </button>
       </li>
     </ul>
+
+    <!-- Case 1: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
+    <div class="case" id="case-1" popover role="dialog" aria-labelledby="case-1-title">
+      <button class="case__back" type="button" popovertarget="case-1" popovertargetaction="hide" autofocus>
+        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
+      </button>
+      <h2 class="visually-hidden" id="case-1-title">Project 1</h2>
+      <div class="placeholder case__image"></div>
+      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
+    </div>
+
+    <!-- Case 2: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
+    <div class="case" id="case-2" popover role="dialog" aria-labelledby="case-2-title">
+      <button class="case__back" type="button" popovertarget="case-2" popovertargetaction="hide" autofocus>
+        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
+      </button>
+      <h2 class="visually-hidden" id="case-2-title">Project 2</h2>
+      <div class="placeholder case__image"></div>
+      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
+    </div>
+
+    <!-- Case 3: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
+    <div class="case" id="case-3" popover role="dialog" aria-labelledby="case-3-title">
+      <button class="case__back" type="button" popovertarget="case-3" popovertargetaction="hide" autofocus>
+        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
+      </button>
+      <h2 class="visually-hidden" id="case-3-title">Project 3</h2>
+      <div class="placeholder case__image"></div>
+      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
+    </div>
+
+    <!-- Case 4: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
+    <div class="case" id="case-4" popover role="dialog" aria-labelledby="case-4-title">
+      <button class="case__back" type="button" popovertarget="case-4" popovertargetaction="hide" autofocus>
+        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
+      </button>
+      <h2 class="visually-hidden" id="case-4-title">Project 4</h2>
+      <div class="placeholder case__image"></div>
+      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
+    </div>
   </main>
 </body>
 </html>

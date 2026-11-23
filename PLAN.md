@@ -59,7 +59,7 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
       (meny, linje och sidrubrik) på alla tre sidor, desktop och mobil, med aktiv länk markerad.
 - [x] **2. Works – lista:** fyra platshållare i sicksack (höger/vänster), 530×358 på desktop och 156×101 på mobil,
       med avstånd enligt Figma.
-- [ ] **3. Works – öppet case:** popover per verk med pil tillbaka, bild och text. Suddig bakgrund.
+- [x] **3. Works – öppet case:** popover per verk med pil tillbaka, bild och text. Suddig bakgrund.
       Desktop enligt `menu 3`, mobil enligt `Frame 14`. Tangentbord och skärmläsare ska fungera.
 - [ ] **4. About:** text i två stycken och en bild. Desktop: text till vänster och bild till höger. Mobil: bild ovanför text.
 - [ ] **5. Contact:** två textstycken.

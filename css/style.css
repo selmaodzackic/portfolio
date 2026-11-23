@@ -77,8 +77,14 @@
   --work-w:       clamp(156px, 65.223px + 24.2071vw, 530px);
   --work-h:       clamp(101px, 38.621px + 16.6343vw, 358px);
 
-  /* Platshållare (Figma: vit på mobil, #d9d9d9 på desktop) */
+  /* Works – öppet case */
+  --case-top:    clamp(294px, 292.058px + 0.5178vw, 302px); /* från fönstrets överkant */
+  --arrow-size:  clamp(24px, 15.990px + 2.1359vw, 57px);
+  --case-blur:   24px;   /* Figma: layer blur 35.5, avstämt visuellt */
+
+  /* Platshållare (Figma: vit/#b3b3b3 på mobil, #d9d9d9/#797777 på desktop) */
   --placeholder-list: #ffffff;
+  --placeholder-case: #b3b3b3;
 }
 
 /* Mobil */
@@ -92,6 +98,7 @@
 @media (min-width: 768px) {
   :root {
     --placeholder-list: #d9d9d9;
+    --placeholder-case: #797777;
   }
 }
 
@@ -250,6 +257,10 @@ body {
 
 .works__link {
   display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
 .placeholder {
@@ -264,4 +275,102 @@ body {
 
 .works__link:hover .works__image {
   opacity: 0.85;
+}
+
+/* --- Works: öppet case (Figma: menu 3 / Frame 14) ---------------------------
+   Varje case är en popover. När ett case är öppet blir listan suddig
+   (mobil, Frame 14) eller döljs (desktop, menu 3). Menyn och rubriken
+   ligger utanför .works och förblir skarpa. */
+.works {
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+body:has(.case:popover-open) .works {
+  filter: blur(var(--case-blur));
+}
+
+@media (min-width: 768px) {
+  body:has(.case:popover-open) .works {
+    opacity: 0;
+  }
+}
+
+.case {
+  /* Nollställ webbläsarens popover-stil */
+  inset: var(--case-top) var(--margin) auto var(--margin);
+  width: auto;
+  max-height: calc(100dvh - var(--case-top));
+  margin: 0;
+  padding: 0 0 var(--margin);
+  border: 0;
+  overflow: auto;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.case::backdrop {
+  background: transparent;
+}
+
+.case__back {
+  display: block;
+  margin: 0 0 4px -2px; /* Figma: pilen 2 px utanför marginalen, bilden 4 px under */
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.case__back img {
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+}
+
+.case__image {
+  width: 100%;
+  aspect-ratio: 335 / 193;
+  background-color: var(--placeholder-case);
+}
+
+.case__text {
+  margin-top: 16px;
+  font-size: var(--body-font);
+}
+
+/* Desktop: pil överst till vänster, text vertikalt centrerad mot bilden */
+@media (min-width: 768px) {
+  .case {
+    right: auto;
+    display: grid;
+    grid-template-columns: max(22.396vw, 240px) 55.365vw; /* 430 + 1063 vid 1920 */
+    column-gap: 1.875vw;                                  /* 36 vid 1920 */
+  }
+
+  .case[popover]:not(:popover-open) {
+    display: none;
+  }
+
+  .case__back {
+    grid-area: 1 / 1;
+    align-self: start;
+    margin: 0;
+  }
+
+  .case__image {
+    grid-area: 1 / 2;
+    margin-top: 0.625vw;                                  /* 12 vid 1920 */
+    aspect-ratio: 1063 / 663;
+  }
+
+  .case__text {
+    grid-area: 1 / 1;
+    align-self: center;
+    margin-top: 0.625vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works {
+    transition: none;
+  }
 }
