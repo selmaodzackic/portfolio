@@ -3,29 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact – Portfolio</title>
+  <title>Contact – Selma Odžačkić</title>
+  <link rel="preload" href="fonts/Switzer-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Gambarino-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-contact">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Menyrad (Figma: Menu bar). "Menu" öppnar navigationen som popover. -->
   <header class="site-header">
-    <nav class="site-nav" aria-label="Main">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link" href="index.html">/ WORKS</a></li>
-        <li><a class="site-nav__link" href="about.html">/ ABOUT</a></li>
-        <li><a class="site-nav__link" href="contact.html" aria-current="page">/ CONTACT</a></li>
-      </ul>
-    </nav>
+    <a class="site-header__item" href="index.html">Live Happily!</a>
+    <button class="site-header__item" type="button" popovertarget="nav">Menu</button>
+    <a class="site-header__item" href="works.html">Visual Archive 01</a>
   </header>
 
-  <main id="main">
-    <h1 class="page-title">/ CONTACT</h1>
+  <!-- Navigation (Figma: Navigation bar). Pricken markerar aktuell sida. -->
+  <nav class="nav" id="nav" popover aria-label="Main">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="index.html">Home</a></li>
+      <li><a class="nav__link" href="works.html">Visual Archive</a></li>
+      <li><a class="nav__link" href="about.html">About</a></li>
+      <li><a class="nav__link" href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </nav>
 
-    <div class="contact">
-      <p>Lorem ipsum dolor sit amet consectetur. In id pretium mauris a donec scelerisque. Id diam sem malesuada convallis aliquam. Enim lacus sem amet dui justo adipiscing congue. Ac neque lacus eu mattis tempor et lobortis sed et.</p>
-      <p>Lorem ipsum dolor sit amet consectetur. In id pretium mauris a donec scelerisque. Id diam sem malesuada convallis aliquam. Enim lacus sem amet dui justo adipiscing congue. Ac neque lacus eu mattis tempor et lobortis sed et.</p>
-    </div>
+  <main id="main" class="contact">
+    <h1 class="display contact__title">Wanna work together?</h1>
+
+    <dl class="contact__list">
+      <dt>Email</dt>
+      <dd><a href="mailto:selma.odzackic@gmail.com">selma.odzackic@gmail.com</a></dd>
+      <dt>Phone</dt>
+      <dd><a href="tel:+46760959045">+46 76 095 90 45</a></dd>
+      <dt>Social</dt>
+      <dd>LinkedIn</dd>
+    </dl>
   </main>
 </body>
 </html>

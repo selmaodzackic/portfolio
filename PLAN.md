@@ -2,94 +2,84 @@
 
 Statisk sajt i ren HTML och CSS byggd från Figma-filen
 [portfolio](https://www.figma.com/design/xuukCGo7CJZ9VfT70u0AId/portfolio), sidan "ready design".
-Sajten ska följa designen exakt i 1920 px (desktop) och 375 px (mobil) och skala mjukt däremellan.
 
-## Vilka Figma-frames som gäller
+## Version 2: ny design (1440)
 
-| Sida | Desktop (1920) | Mobil (375) |
+Designen gjordes om i november 2026: vit bakgrund, Switzer och Gambarino, en meny som fälls ut och en startsida.
+Den gamla svarta designen (1920 och 375) finns kvar i git-historiken (till och med commit `cdb41b4`).
+
+### Vilka Figma-frames som gäller
+
+| Sida | Fil | Frame (1440) |
 |---|---|---|
-| Works – lista | `menu 2` (24:95) | `Frame 2` (93:91) |
-| Works – öppet case | `menu 3` (93:145) | `Frame 14` (102:215) |
-| About | `menu 4` (38:2) | `Frame 3` (93:105) |
-| Contact | `menu 5` (78:424) | `Frame 13` (98:192) |
+| Startsida | `index.html` | `Landing Page` (118:191) |
+| Meny öppen | alla sidor | `Menu pressed` (128:67), komponent `Navigation bar` (128:101) |
+| Visual Archive | `works.html` | `Works` (131:286) |
+| About | `about.html` | `About` (128:131) |
+| Contact | `contact.html` | `Contact` (131:318) |
 
-Startsidan (`start 1`, `start 2`) ingår inte än.
+Mobil (375) ritas om i Figma först. Framesen `Frame 2`, `Frame 3`, `Frame 13` och `Frame 14` hör till den gamla designen.
 
-## Designvariabler (från Figma)
+### Designvariabler (från Figma)
 
-- Färger: bakgrund `#000000`, text `#ffffff`
-- Typsnitt: Neue Haas Grotesk Display Pro
-  - Meny: 65 Medium, 24 px, radhöjd 100 %, spärrning 4
-  - Rubrik: 95 Black, 128 px, radhöjd 100 %, spärrning 3
-  - Brödtext: 55 Roman, 24 px, radhöjd 100 %
-- Grid: 12 kolumner, marginal 40 px, mellanrum 24 px
-- Mobil: marginal 20 px
+- Färger: bakgrund `#ffffff`, text `#000000`, nedtryckt menyval `#626262`, grå sektion `#d9d9d9`,
+  bakgrund bakom öppen meny 62 % svart.
+- Switzer (sans): menyrad Bold 20, brödtext Bold 24, kontakt Regular 16, spärrning 4 %.
+- Gambarino (serif): namn 120, sidrubriker 140, menyval 100, etiketter 16, spärrning 3 %.
+- Radhöjd "normal" överallt, som i Figmas textlager.
+- Marginal 40.
 
-## Beslut
+### Beslut
 
-- **Bara HTML och CSS, inget JavaScript.** Ett case öppnas med HTML:s inbyggda
-  `popover`. Bakgrunden och de andra verken blir suddiga med CSS (`filter: blur()` via `:has(:popover-open)`),
-  medan menyn och rubriken förblir skarpa, som i `Frame 14`. Esc, pilen och klick utanför stänger caset.
-  Man stannar kvar på Works-sidan.
-- **`index.html` är Works** tills startsidan finns.
-- **Platshållare:** grå rutor och lorem ipsum tills riktigt innehåll finns.
-- **Responsivitet:** exakta Figma-mått vid 1920 och 375. Däremellan skalar storlekar med `clamp()`, och
-  layouten växlar mellan mobil och desktop vid en brytpunkt (cirka 768 px). En egen 1440-design läggs till senare.
-- **Hover/fokus på menyn:** diskret understrykning plus synlig fokusmarkering för tangentbord (finns inte i Figma).
+- **Bara HTML och CSS, inget JavaScript.** Menyn är en `popover` som öppnas med "Menu".
+  Esc, klick utanför eller "Menu" igen stänger den. Pricken visar aktuell sida.
+- **Skalning:** alla mått är Figma-pixlar gånger `--u` (1/1440 av fönsterbredden). Exakt vid 1440,
+  proportionerligt större vid 1920 och mindre under 1440 tills mobildesignen finns.
+- **Verken i Visual Archive går inte att klicka på** än. Ett öppet läge designas senare.
+- **Menyraden:** "Live Happily!" länkar till startsidan och "Visual Archive 01" till Visual Archive.
+- **Typsnitt:** woff2 från Fontshare (ITF Free Font License) i `fonts/`.
+- **Startsidans bild:** exporterad från Figma med strukturen (crayon-effekten) inbakad, 2× för skarpa skärmar.
+- **Placeholders:** grå rutor och lorem ipsum tills riktigt innehåll finns.
 
-## Filstruktur
+### Filstruktur
 
 ```
 portfolio/
-├── index.html        Works (lista + case som popovers)
+├── index.html        Startsida
+├── works.html        Visual Archive
 ├── about.html
 ├── contact.html
-├── css/
-│   └── style.css     variabler, reset, header, sidor, brytpunkter
-├── fonts/            Neue Haas Grotesk Display Pro (55, 65, 95)
-└── img/              pilikon (exporterad från Figma)
+├── css/style.css     variabler, reset, menyrad, meny, sidor
+├── fonts/            Switzer (400, 600, 700), Gambarino (400)
+└── img/              landing.jpg, dot.svg, arrow-down.svg
 ```
 
-## Steg
+### Steg
 
-Varje steg avslutas med en commit, och du granskar innan vi går vidare.
+- [x] Typsnitt och bilder från Fontshare och Figma.
+- [x] Grund, menyrad och meny (popover).
+- [x] Startsida.
+- [x] Visual Archive.
+- [x] About: vit introduktion med pil ner till den grå sektionen.
+- [x] Contact.
+- [ ] Mobil, när den nya 375-designen finns i Figma.
+- [ ] Öppet läge för verken i Visual Archive.
+- [ ] Riktiga bilder och texter, LinkedIn-länk.
 
-- [x] **0. Plan och repo:** `git init`, `PLAN.md`, `.gitignore`.
-- [x] **1. Grund och header:** filstruktur, `@font-face`, CSS-variabler, reset. Den gemensamma headern
-      (meny, linje och sidrubrik) på alla tre sidor, desktop och mobil, med aktiv länk markerad.
-- [x] **2. Works – lista:** fyra platshållare i sicksack (höger/vänster), 530×358 på desktop och 156×101 på mobil,
-      med avstånd enligt Figma.
-- [x] **3. Works – öppet case:** popover per verk med pil tillbaka, bild och text. Suddig bakgrund.
-      Desktop enligt `menu 3`, mobil enligt `Frame 14`. Tangentbord och skärmläsare ska fungera.
-- [x] **4. About:** text i två stycken och en bild. Desktop: text till vänster och bild till höger. Mobil: bild ovanför text.
-- [x] **5. Contact:** två textstycken.
-- [x] **6. Responsivitet och kontroll:** testa mellanbredder, jämför varje sida med Figma vid 1920 och 375,
-      kontrollera kontrast, fokus, `prefers-reduced-motion` och validera HTML.
-- [ ] **Senare:** 1440-design, startsida, riktiga bilder och texter.
+### Avgjort
 
-## Öppna punkter
+- Menyraden ligger överst (y 0) på alla sidor. I `Landing Page` och `Menu pressed` ligger allt 4 px lägre,
+  vilket inte följts så att menyraden står still mellan sidorna.
+- `Works`-framen saknar menyrad i Figma. Den läggs ändå på alla sidor eftersom menyn bara nås därifrån.
+- Avstånden mellan verken i Visual Archive är olika (88, 75, 77) och följer Figma.
 
-- **Typsnitt:** `fonts/` är tom. CSS:en hittar Neue Haas Grotesk Display Pro om det är installerat lokalt, och annars används
-  Helvetica Neue (Roman/Medium/Bold) som reserv. Webbfonter (woff2) behövs innan sajten publiceras.
-  Mappen `portfolio:font/` (Macens HelveticaNeue.ttc) ignoreras av git.
+### Kontroll
 
-## Avgjort
+- Alla fyra sidor och menyn uppmätta mot Figma vid 1440: placering och storlek stämmer inom 0,5 px.
+- Ingen horisontell scroll vid 1440 och 1920.
+- Tangentbord: skip-länk, menyrad, "Menu" öppnar menyn, Tab går in i menyn, Esc stänger.
+- Kontrast svart på vitt 21:1. Fokusmarkering 2 px svart.
 
-- Alla mobilsidor följer `Frame 2`: meny 16 px, rubrik 39 px med 20 px marginal. Aktiv länk i 95 Black på mobil, som i Figma.
-  Desktop har ingen markering av aktiv länk, eftersom Figma inte har någon.
-- Öppet case: på mobil blir listan suddig (`Frame 14`). På desktop döljs listan helt, eftersom `menu 3` inte visar
-  de andra verken. Suddet är 24 px i CSS, avstämt visuellt mot Figmas layer blur på 35.5.
-- Radhöjd 1.2: Figmas textlager renderas med radhöjd "normal" (cirka 1.2), så måtten stämmer trots att
-  textstilarna säger 100 %.
-- Mobilsidorna About och Contact har samma avstånd mellan rubrik och innehåll som i `Frame 3` och `Frame 13`,
-  räknat från rubriken i `Frame 2`.
+## Version 1: svart design (1920/375), ersatt
 
-## Kontroll (steg 6)
-
-- Alla sidor uppmätta mot Figma vid 1920 och 375: placering och storlek stämmer på pixeln.
-- Ingen horisontell scroll vid 375, 767, 768, 1440 och 1920.
-- Tangentbord: skip-länk, meny, verk → Enter öppnar caset med fokus på pilen, Enter/Esc stänger, fokus
-  återgår till verket. Klick utanför stänger.
-- Kontrast vit på svart 21:1. Fokusmarkering 2 px vit. Övergången för suddet stängs av med `prefers-reduced-motion`.
-- HTML: struktur, unika id:n, referenser och alt-texter kontrollerade lokalt. Ingen extern validator körd.
-
+Steg 0–6 gjordes klart i november 2026 (commits `a92dfe7` till `cdb41b4`).
