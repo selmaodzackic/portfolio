@@ -85,6 +85,8 @@
   /* About och Contact */
   --about-top:    clamp(10px, 60.951px - 2.6537vw, 51px);   /* rubrik -> innehåll */
   --about-pgap:   clamp(15px, 10.388px + 1.2298vw, 34px);   /* mellan stycken */
+  --contact-top:  clamp(36px, 3.961px + 8.5437vw, 168px);   /* rubrik -> text */
+  --contact-pgap: clamp(15px, 2.379px + 3.3657vw, 67px);    /* mellan stycken */
 
   /* Platshållare (Figma: vit/#b3b3b3 på mobil, #d9d9d9/#797777 på desktop) */
   --placeholder-list: #ffffff;
@@ -422,5 +424,22 @@ body:has(.case:popover-open) .works {
     width: 28.281vw;                       /* 543 vid 1920 */
     height: auto;
     aspect-ratio: 543 / 615;
+  }
+}
+
+/* --- Contact (Figma: menu 5 / Frame 13) ------------------------------------- */
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--contact-pgap);
+  padding: var(--contact-top) var(--margin) var(--works-bottom);
+  font-size: var(--body-font);
+}
+
+@media (min-width: 768px) {
+  .contact {
+    width: calc(9.323vw + max(30.781vw, 300px)); /* samma textkolumn som About */
+    padding-left: 9.323vw;
+    padding-right: 0;
   }
 }
