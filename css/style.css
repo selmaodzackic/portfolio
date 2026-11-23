@@ -82,6 +82,10 @@
   --arrow-size:  clamp(24px, 15.990px + 2.1359vw, 57px);
   --case-blur:   24px;   /* Figma: layer blur 35.5, avstämt visuellt */
 
+  /* About och Contact */
+  --about-top:    clamp(10px, 60.951px - 2.6537vw, 51px);   /* rubrik -> innehåll */
+  --about-pgap:   clamp(15px, 10.388px + 1.2298vw, 34px);   /* mellan stycken */
+
   /* Platshållare (Figma: vit/#b3b3b3 på mobil, #d9d9d9/#797777 på desktop) */
   --placeholder-list: #ffffff;
   --placeholder-case: #b3b3b3;
@@ -372,5 +376,51 @@ body:has(.case:popover-open) .works {
 @media (prefers-reduced-motion: reduce) {
   .works {
     transition: none;
+  }
+}
+
+/* --- About (Figma: menu 4 / Frame 3) ----------------------------------------
+   Mobil: bild centrerad ovanför texten. Desktop: text till vänster,
+   bild till höger, vertikalt centrerade mot varandra. */
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 39px;
+  padding: var(--about-top) var(--margin) var(--works-bottom);
+}
+
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--about-pgap);
+  width: 100%;
+  font-size: var(--body-font);
+}
+
+.about__image {
+  order: -1;
+  width: 215px;
+  height: 226px;
+  background-color: #d9d9d9;
+}
+
+@media (min-width: 768px) {
+  .about {
+    flex-direction: row;
+    gap: 10.521vw;                         /* 202 vid 1920 */
+    padding-left: 9.323vw;                 /* 179 vid 1920 */
+  }
+
+  .about__text {
+    width: max(30.781vw, 300px);           /* 591 vid 1920 */
+    flex-shrink: 0;
+  }
+
+  .about__image {
+    order: 0;
+    width: 28.281vw;                       /* 543 vid 1920 */
+    height: auto;
+    aspect-ratio: 543 / 615;
   }
 }

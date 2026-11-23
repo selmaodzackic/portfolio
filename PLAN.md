@@ -61,7 +61,7 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
       med avstånd enligt Figma.
 - [x] **3. Works – öppet case:** popover per verk med pil tillbaka, bild och text. Suddig bakgrund.
       Desktop enligt `menu 3`, mobil enligt `Frame 14`. Tangentbord och skärmläsare ska fungera.
-- [ ] **4. About:** text i två stycken och en bild. Desktop: text till vänster och bild till höger. Mobil: bild ovanför text.
+- [x] **4. About:** text i två stycken och en bild. Desktop: text till vänster och bild till höger. Mobil: bild ovanför text.
 - [ ] **5. Contact:** två textstycken.
 - [ ] **6. Responsivitet och kontroll:** testa mellanbredder, jämför varje sida med Figma vid 1920 och 375,
       kontrollera kontrast, fokus, `prefers-reduced-motion` och validera HTML.
