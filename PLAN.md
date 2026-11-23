@@ -63,7 +63,7 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
       Desktop enligt `menu 3`, mobil enligt `Frame 14`. Tangentbord och skärmläsare ska fungera.
 - [x] **4. About:** text i två stycken och en bild. Desktop: text till vänster och bild till höger. Mobil: bild ovanför text.
 - [x] **5. Contact:** två textstycken.
-- [ ] **6. Responsivitet och kontroll:** testa mellanbredder, jämför varje sida med Figma vid 1920 och 375,
+- [x] **6. Responsivitet och kontroll:** testa mellanbredder, jämför varje sida med Figma vid 1920 och 375,
       kontrollera kontrast, fokus, `prefers-reduced-motion` och validera HTML.
 - [ ] **Senare:** 1440-design, startsida, riktiga bilder och texter.
 
@@ -77,3 +77,19 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
 
 - Alla mobilsidor följer `Frame 2`: meny 16 px, rubrik 39 px med 20 px marginal. Aktiv länk i 95 Black på mobil, som i Figma.
   Desktop har ingen markering av aktiv länk, eftersom Figma inte har någon.
+- Öppet case: på mobil blir listan suddig (`Frame 14`). På desktop döljs listan helt, eftersom `menu 3` inte visar
+  de andra verken. Suddet är 24 px i CSS, avstämt visuellt mot Figmas layer blur på 35.5.
+- Radhöjd 1.2: Figmas textlager renderas med radhöjd "normal" (cirka 1.2), så måtten stämmer trots att
+  textstilarna säger 100 %.
+- Mobilsidorna About och Contact har samma avstånd mellan rubrik och innehåll som i `Frame 3` och `Frame 13`,
+  räknat från rubriken i `Frame 2`.
+
+## Kontroll (steg 6)
+
+- Alla sidor uppmätta mot Figma vid 1920 och 375: placering och storlek stämmer på pixeln.
+- Ingen horisontell scroll vid 375, 767, 768, 1440 och 1920.
+- Tangentbord: skip-länk, meny, verk → Enter öppnar caset med fokus på pilen, Enter/Esc stänger, fokus
+  återgår till verket. Klick utanför stänger.
+- Kontrast vit på svart 21:1. Fokusmarkering 2 px vit. Övergången för suddet stängs av med `prefers-reduced-motion`.
+- HTML: struktur, unika id:n, referenser och alt-texter kontrollerade lokalt. Ingen extern validator körd.
+
