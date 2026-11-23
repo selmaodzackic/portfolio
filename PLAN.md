@@ -64,7 +64,8 @@ portfolio/
 - [x] Contact.
 - [ ] Mobil, när den nya 375-designen finns i Figma.
 - [ ] Öppet läge för verken i Visual Archive.
-- [ ] Riktiga bilder och texter, LinkedIn-länk.
+- [x] LinkedIn-länk.
+- [ ] Riktiga bilder och texter.
 
 ### Avgjort
 
