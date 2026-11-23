@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Portfolio – gemensamma stilar
+   Mått från Figma: mobil 375 px och desktop 1920 px.
+   Flytande värden (clamp) ger exakta Figma-mått vid 375 och 1920
+   och skalar linjärt däremellan.
+   ========================================================================== */
+
+/* --- Typsnitt --------------------------------------------------------------
+   Neue Haas Grotesk Display Pro. local() hittar typsnittet om det är
+   installerat på datorn. Lägg webbfonter i /fonts och lägg till en url()-rad
+   per vikt när de finns, t.ex.:
+   src: local(...), url("../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+   Saknas typsnittet används Helvetica Neue (Roman/Medium/Bold) via de sista
+   local()-raderna, annars Helvetica / Arial (se --font). */
+@font-face {
+  font-family: "Neue Haas Display";
+  font-style: normal;
+  font-weight: 400; /* 55 Roman */
+  font-display: swap;
+  src: local("Neue Haas Grotesk Display Pro 55 Roman"), local("NHaasGroteskDSPro-55Rg"),
+       local("NeueHaasDisplay-Roman"),
+       local("HelveticaNeue"), local("Helvetica Neue"); /* reserv */
+}
+@font-face {
+  font-family: "Neue Haas Display";
+  font-style: normal;
+  font-weight: 500; /* 65 Medium */
+  font-display: swap;
+  src: local("Neue Haas Grotesk Display Pro 65 Medium"), local("NHaasGroteskDSPro-65Md"),
+       local("NeueHaasDisplay-Mediu"),
+       local("HelveticaNeue-Medium"), local("Helvetica Neue Medium"); /* reserv */
+}
+@font-face {
+  font-family: "Neue Haas Display";
+  font-style: normal;
+  font-weight: 900; /* 95 Black */
+  font-display: swap;
+  src: local("Neue Haas Grotesk Display Pro 95 Black"), local("NHaasGroteskDSPro-95Blk"),
+       local("NeueHaasDisplay-Black"),
+       local("HelveticaNeue-Bold"), local("Helvetica Neue Bold"); /* reserv: HN saknar Black */
+}
+
+/* --- Designvariabler -------------------------------------------------------- */
+:root {
+  /* Färger */
+  --color-bg: #000000;      /* background/primary */
+  --color-text: #ffffff;    /* text/primary */
+
+  /* Typsnitt */
+  --font: "Neue Haas Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --weight-body: 400;       /* 55 Roman */
+  --weight-menu: 500;       /* 65 Medium */
+  --weight-heading: 900;    /* 95 Black */
+  --line-height: 1.2;
+
+  /* Grid (desktop): 12 kolumner, 24 px mellanrum */
+  --grid-columns: 12;
+  --grid-gap: 24px;
+
+  /* Flytande mått: 375 px -> 1920 px */
+  --margin:      clamp(20px, 15.146px + 1.2945vw, 40px);   /* 20 -> 40 */
+  --nav-font:    clamp(16px, 14.058px + 0.5178vw, 24px);   /* 16 -> 24 */
+  --nav-top:     clamp(17px, 14.330px + 0.7120vw, 28px);   /* menytextens överkant */
+  --nav-height:  clamp(42px, 32.049px + 2.6537vw, 83px);   /* linjens överkant */
+  --nav-col-1:   clamp(120px, 73.641px + 12.3625vw, 311px); /* WORKS -> ABOUT */
+  --nav-col-2:   clamp(119px, 74.097px + 11.9741vw, 304px); /* ABOUT -> CONTACT */
+  --title-font:  clamp(39px, 17.398px + 5.7605vw, 128px);  /* 39 -> 128 */
+  --title-gap:   clamp(9px, -2.165px + 2.9773vw, 55px);    /* linje -> rubrik */
+  --title-tracking: 0.03em;                                 /* 3 % (desktop) */
+  --nav-tracking: 0.04em;                                   /* 4 % */
+}
+
+/* Mobil */
+@media (max-width: 767px) {
+  :root {
+    --title-tracking: 0.04em; /* 1.56 px / 39 px i Figma */
+  }
+}
+
+/* --- Reset ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Bas -------------------------------------------------------------------- */
+body {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font);
+  font-weight: var(--weight-body);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: var(--margin);
+  z-index: 100;
+  padding: 8px 12px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: var(--weight-menu);
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* --- Header: meny + linje (Figma: Navigation) ------------------------------- */
+.site-nav {
+  height: var(--nav-height);
+  padding-top: var(--nav-top);
+  border-bottom: 1px solid var(--color-text);
+}
+
+.site-nav__list {
+  display: grid;
+  grid-template-columns: var(--nav-col-1) var(--nav-col-2) auto;
+  justify-content: start;
+  padding-left: var(--margin);
+}
+
+.site-nav__link {
+  display: inline-block;
+  font-size: var(--nav-font);
+  font-weight: var(--weight-menu);
+  letter-spacing: var(--nav-tracking);
+  line-height: var(--line-height);
+  white-space: nowrap;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.site-nav__link:hover {
+  text-decoration-line: underline;
+}
+
+/* Mobil: aktiv sida visas i 95 Black (Figma: Frame 2) */
+@media (max-width: 767px) {
+  .site-nav__link[aria-current="page"] {
+    font-weight: var(--weight-heading);
+  }
+}
+
+/* --- Sidrubrik (Figma: Page Title) ------------------------------------------ */
+.page-title {
+  margin-top: var(--title-gap);
+  padding-left: var(--margin);
+  font-size: var(--title-font);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--title-tracking);
+  line-height: var(--line-height);
+  white-space: nowrap;
+}

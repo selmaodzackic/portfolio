@@ -55,7 +55,7 @@ portfolio/
 Varje steg avslutas med en commit, och du granskar innan vi går vidare.
 
 - [x] **0. Plan och repo:** `git init`, `PLAN.md`, `.gitignore`.
-- [ ] **1. Grund och header:** filstruktur, `@font-face`, CSS-variabler, reset. Den gemensamma headern
+- [x] **1. Grund och header:** filstruktur, `@font-face`, CSS-variabler, reset. Den gemensamma headern
       (meny, linje och sidrubrik) på alla tre sidor, desktop och mobil, med aktiv länk markerad.
 - [ ] **2. Works – lista:** fyra platshållare i sicksack (höger/vänster), 530×358 på desktop och 156×101 på mobil,
       med avstånd enligt Figma.
@@ -69,5 +69,11 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
 
 ## Öppna punkter
 
-- Mobilframes har olika storlek på menyn: `Frame 2`/`Frame 14` har cirka 16 px meny och 20 px vänstermarginal på rubriken,
-  medan `Frame 3`/`Frame 13` har cirka 20 px meny och rubriken mot kanten (x = 0). Förslag: följ `Frame 2` på alla mobilsidor.
+- **Typsnitt:** `fonts/` är tom. CSS:en hittar Neue Haas Grotesk Display Pro om det är installerat lokalt, och annars används
+  Helvetica Neue (Roman/Medium/Bold) som reserv. Webbfonter (woff2) behövs innan sajten publiceras.
+  Mappen `portfolio:font/` (Macens HelveticaNeue.ttc) ignoreras av git.
+
+## Avgjort
+
+- Alla mobilsidor följer `Frame 2`: meny 16 px, rubrik 39 px med 20 px marginal. Aktiv länk i 95 Black på mobil, som i Figma.
+  Desktop har ingen markering av aktiv länk, eftersom Figma inte har någon.

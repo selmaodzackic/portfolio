@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+
+# Systemtypsnitt från Mac (ska inte committas)
+portfolio:font/
