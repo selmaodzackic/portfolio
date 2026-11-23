@@ -57,7 +57,7 @@ Varje steg avslutas med en commit, och du granskar innan vi går vidare.
 - [x] **0. Plan och repo:** `git init`, `PLAN.md`, `.gitignore`.
 - [x] **1. Grund och header:** filstruktur, `@font-face`, CSS-variabler, reset. Den gemensamma headern
       (meny, linje och sidrubrik) på alla tre sidor, desktop och mobil, med aktiv länk markerad.
-- [ ] **2. Works – lista:** fyra platshållare i sicksack (höger/vänster), 530×358 på desktop och 156×101 på mobil,
+- [x] **2. Works – lista:** fyra platshållare i sicksack (höger/vänster), 530×358 på desktop och 156×101 på mobil,
       med avstånd enligt Figma.
 - [ ] **3. Works – öppet case:** popover per verk med pil tillbaka, bild och text. Suddig bakgrund.
       Desktop enligt `menu 3`, mobil enligt `Frame 14`. Tangentbord och skärmläsare ska fungera.

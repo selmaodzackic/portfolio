@@ -68,12 +68,30 @@
   --title-gap:   clamp(9px, -2.165px + 2.9773vw, 55px);    /* linje -> rubrik */
   --title-tracking: 0.03em;                                 /* 3 % (desktop) */
   --nav-tracking: 0.04em;                                   /* 4 % */
+  --body-font:   clamp(16px, 14.058px + 0.5178vw, 24px);   /* 16 -> 24 */
+
+  /* Works */
+  --works-top:    clamp(10px, 31.126px - 1.1003vw, 27px);   /* rubrik -> första verket */
+  --works-gap:    140px;                                     /* lika på mobil och desktop */
+  --works-bottom: clamp(70px, 94.854px - 1.2945vw, 90px);
+  --work-w:       clamp(156px, 65.223px + 24.2071vw, 530px);
+  --work-h:       clamp(101px, 38.621px + 16.6343vw, 358px);
+
+  /* Platshållare (Figma: vit på mobil, #d9d9d9 på desktop) */
+  --placeholder-list: #ffffff;
 }
 
 /* Mobil */
 @media (max-width: 767px) {
   :root {
     --title-tracking: 0.04em; /* 1.56 px / 39 px i Figma */
+  }
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  :root {
+    --placeholder-list: #d9d9d9;
   }
 }
 
@@ -129,6 +147,15 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .skip-link {
@@ -192,4 +219,49 @@ body {
   letter-spacing: var(--title-tracking);
   line-height: var(--line-height);
   white-space: nowrap;
+}
+
+/* --- Works: lista (Figma: menu 2 / Frame 2) --------------------------------
+   Fyra verk i sicksack. Mobil börjar till vänster, desktop till höger. */
+.works {
+  display: flex;
+  flex-direction: column;
+  gap: var(--works-gap);
+  padding: var(--works-top) var(--margin) var(--works-bottom);
+}
+
+.works__item {
+  align-self: flex-start;
+}
+
+.works__item:nth-child(even) {
+  align-self: flex-end;
+}
+
+@media (min-width: 768px) {
+  .works__item {
+    align-self: flex-end;
+  }
+
+  .works__item:nth-child(even) {
+    align-self: flex-start;
+  }
+}
+
+.works__link {
+  display: block;
+}
+
+.placeholder {
+  display: block;
+}
+
+.works__image {
+  width: var(--work-w);
+  height: var(--work-h);
+  background-color: var(--placeholder-list);
+}
+
+.works__link:hover .works__image {
+  opacity: 0.85;
 }
