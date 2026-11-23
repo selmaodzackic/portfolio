@@ -3,91 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Works – Portfolio</title>
+  <title>Visual Archive – Selma Odžačkić</title>
+  <link rel="preload" href="fonts/Switzer-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Gambarino-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-archive">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Menyrad (Figma: Menu bar). "Menu" öppnar navigationen som popover. -->
   <header class="site-header">
-    <nav class="site-nav" aria-label="Main">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link" href="index.html" aria-current="page">/ WORKS</a></li>
-        <li><a class="site-nav__link" href="about.html">/ ABOUT</a></li>
-        <li><a class="site-nav__link" href="contact.html">/ CONTACT</a></li>
-      </ul>
-    </nav>
+    <a class="site-header__item" href="index.html">Live Happily!</a>
+    <button class="site-header__item" type="button" popovertarget="nav">Menu</button>
+    <a class="site-header__item" href="works.html">Visual Archive 01</a>
   </header>
 
-  <main id="main">
-    <h1 class="page-title">/ WORKS</h1>
-
-    <ul class="works" aria-label="Works">
-      <li class="works__item">
-        <button class="works__link" type="button" popovertarget="case-1">
-          <span class="placeholder works__image"></span>
-          <span class="visually-hidden">Project 1</span>
-        </button>
-      </li>
-      <li class="works__item">
-        <button class="works__link" type="button" popovertarget="case-2">
-          <span class="placeholder works__image"></span>
-          <span class="visually-hidden">Project 2</span>
-        </button>
-      </li>
-      <li class="works__item">
-        <button class="works__link" type="button" popovertarget="case-3">
-          <span class="placeholder works__image"></span>
-          <span class="visually-hidden">Project 3</span>
-        </button>
-      </li>
-      <li class="works__item">
-        <button class="works__link" type="button" popovertarget="case-4">
-          <span class="placeholder works__image"></span>
-          <span class="visually-hidden">Project 4</span>
-        </button>
-      </li>
+  <!-- Navigation (Figma: Navigation bar). Pricken markerar aktuell sida. -->
+  <nav class="nav" id="nav" popover aria-label="Main">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="index.html">Home</a></li>
+      <li><a class="nav__link" href="works.html" aria-current="page">Visual Archive</a></li>
+      <li><a class="nav__link" href="about.html">About</a></li>
+      <li><a class="nav__link" href="contact.html">Contact</a></li>
     </ul>
+  </nav>
 
-    <!-- Case 1: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
-    <div class="case" id="case-1" popover role="dialog" aria-labelledby="case-1-title">
-      <button class="case__back" type="button" popovertarget="case-1" popovertargetaction="hide" autofocus>
-        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
-      </button>
-      <h2 class="visually-hidden" id="case-1-title">Project 1</h2>
-      <div class="placeholder case__image"></div>
-      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
-    </div>
+  <main id="main" class="archive">
+    <h1 class="display archive__title">Visual Archive</h1>
 
-    <!-- Case 2: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
-    <div class="case" id="case-2" popover role="dialog" aria-labelledby="case-2-title">
-      <button class="case__back" type="button" popovertarget="case-2" popovertargetaction="hide" autofocus>
-        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
-      </button>
-      <h2 class="visually-hidden" id="case-2-title">Project 2</h2>
-      <div class="placeholder case__image"></div>
-      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
-    </div>
-
-    <!-- Case 3: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
-    <div class="case" id="case-3" popover role="dialog" aria-labelledby="case-3-title">
-      <button class="case__back" type="button" popovertarget="case-3" popovertargetaction="hide" autofocus>
-        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
-      </button>
-      <h2 class="visually-hidden" id="case-3-title">Project 3</h2>
-      <div class="placeholder case__image"></div>
-      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
-    </div>
-
-    <!-- Case 4: öppnas av knappen i listan, stängs med pilen, Esc eller klick utanför -->
-    <div class="case" id="case-4" popover role="dialog" aria-labelledby="case-4-title">
-      <button class="case__back" type="button" popovertarget="case-4" popovertargetaction="hide" autofocus>
-        <img src="img/arrow-left.svg" alt="Back to works" width="24" height="24">
-      </button>
-      <h2 class="visually-hidden" id="case-4-title">Project 4</h2>
-      <div class="placeholder case__image"></div>
-      <p class="case__text">Lorem ipsum viverra arcu vulputate pellentesque egestas pretium felis vulputate viverra et augue leo purus fermentum phasellus tristique platea velit sit sagittis interdum massa.</p>
-    </div>
+    <ol class="archive__list" aria-label="Works">
+      <li class="archive__item">
+        <p class="archive__label">[01]</p>
+        <div class="placeholder archive__image"></div>
+      </li>
+      <li class="archive__item">
+        <p class="archive__label">[02]</p>
+        <div class="placeholder archive__image"></div>
+      </li>
+      <li class="archive__item">
+        <p class="archive__label">[03]</p>
+        <div class="placeholder archive__image"></div>
+      </li>
+      <li class="archive__item">
+        <p class="archive__label">[04]</p>
+        <div class="placeholder archive__image"></div>
+      </li>
+    </ol>
   </main>
 </body>
 </html>
