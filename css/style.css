@@ -1,111 +1,71 @@
 /* ==========================================================================
    Portfolio – gemensamma stilar
-   Mått från Figma: mobil 375 px och desktop 1920 px.
-   Flytande värden (clamp) ger exakta Figma-mått vid 375 och 1920
-   och skalar linjärt däremellan.
+   Byggd från Figma-sidan "ready design" (desktop 1440 px).
+   Alla mått anges i Figma-pixlar gånger --u, där --u är 1/1440 av
+   fönsterbredden. Vid 1440 blir måtten exakt som i Figma, och i andra
+   bredder skalar hela layouten proportionerligt (t.ex. 1,33 × vid 1920).
+   Mobil (375) väntar på ny design i Figma.
    ========================================================================== */
 
-/* --- Typsnitt --------------------------------------------------------------
-   Neue Haas Grotesk Display Pro. local() hittar typsnittet om det är
-   installerat på datorn. Lägg webbfonter i /fonts och lägg till en url()-rad
-   per vikt när de finns, t.ex.:
-   src: local(...), url("../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
-   Saknas typsnittet används Helvetica Neue (Roman/Medium/Bold) via de sista
-   local()-raderna, annars Helvetica / Arial (se --font). */
+/* --- Typsnitt (Fontshare, ITF Free Font License) ---------------------------- */
 @font-face {
-  font-family: "Neue Haas Display";
+  font-family: "Switzer";
+  src: url("../fonts/Switzer-Regular.woff2") format("woff2");
+  font-weight: 400;
   font-style: normal;
-  font-weight: 400; /* 55 Roman */
   font-display: swap;
-  src: local("Neue Haas Grotesk Display Pro 55 Roman"), local("NHaasGroteskDSPro-55Rg"),
-       local("NeueHaasDisplay-Roman"),
-       local("HelveticaNeue"), local("Helvetica Neue"); /* reserv */
 }
 @font-face {
-  font-family: "Neue Haas Display";
+  font-family: "Switzer";
+  src: url("../fonts/Switzer-Semibold.woff2") format("woff2");
+  font-weight: 600;
   font-style: normal;
-  font-weight: 500; /* 65 Medium */
   font-display: swap;
-  src: local("Neue Haas Grotesk Display Pro 65 Medium"), local("NHaasGroteskDSPro-65Md"),
-       local("NeueHaasDisplay-Mediu"),
-       local("HelveticaNeue-Medium"), local("Helvetica Neue Medium"); /* reserv */
 }
 @font-face {
-  font-family: "Neue Haas Display";
+  font-family: "Switzer";
+  src: url("../fonts/Switzer-Bold.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
-  font-weight: 900; /* 95 Black */
   font-display: swap;
-  src: local("Neue Haas Grotesk Display Pro 95 Black"), local("NHaasGroteskDSPro-95Blk"),
-       local("NeueHaasDisplay-Black"),
-       local("HelveticaNeue-Bold"), local("Helvetica Neue Bold"); /* reserv: HN saknar Black */
+}
+@font-face {
+  font-family: "Gambarino";
+  src: url("../fonts/Gambarino-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* --- Designvariabler -------------------------------------------------------- */
 :root {
+  --u: calc(100vw / 1440);              /* 1 Figma-pixel */
+
   /* Färger */
-  --color-bg: #000000;      /* background/primary */
-  --color-text: #ffffff;    /* text/primary */
+  --color-bg: #ffffff;                  /* background/primary */
+  --color-text: #000000;
+  --color-pressed: #626262;             /* Home, Property 1=pressed */
+  --color-band: #d9d9d9;                /* About: grå sektion */
+  --color-placeholder: #d9d9d9;
+  --color-placeholder-dark: #747474;
+  --color-placeholder-darker: #777777;
+  --color-overlay: rgba(0, 0, 0, 0.62); /* Menu pressed */
 
   /* Typsnitt */
-  --font: "Neue Haas Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --weight-body: 400;       /* 55 Roman */
-  --weight-menu: 500;       /* 65 Medium */
-  --weight-heading: 900;    /* 95 Black */
-  --line-height: 1.2;
+  --font-sans: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Gambarino", Georgia, "Times New Roman", serif;
 
-  /* Grid (desktop): 12 kolumner, 24 px mellanrum */
-  --grid-columns: 12;
-  --grid-gap: 24px;
+  /* Textstilar från Figma: storlek och spärrning (4 % sans, 3 % serif) */
+  --text-menu: calc(20 * var(--u));     /* Menu / text/menu */
+  --text-body: calc(24 * var(--u));     /* text/body */
+  --text-contact: calc(16 * var(--u));  /* text/contact */
+  --text-heading: calc(120 * var(--u)); /* text/heading (startsidan) */
+  --text-display: calc(140 * var(--u)); /* sidrubriker */
+  --text-nav: calc(100 * var(--u));     /* text/navigation bar */
+  --tracking-sans: 0.04em;
+  --tracking-serif: 0.03em;
 
-  /* Flytande mått: 375 px -> 1920 px */
-  --margin:      clamp(20px, 15.146px + 1.2945vw, 40px);   /* 20 -> 40 */
-  --nav-font:    clamp(16px, 14.058px + 0.5178vw, 24px);   /* 16 -> 24 */
-  --nav-top:     clamp(17px, 14.330px + 0.7120vw, 28px);   /* menytextens överkant */
-  --nav-height:  clamp(42px, 32.049px + 2.6537vw, 83px);   /* linjens överkant */
-  --nav-col-1:   clamp(120px, 73.641px + 12.3625vw, 311px); /* WORKS -> ABOUT */
-  --nav-col-2:   clamp(119px, 74.097px + 11.9741vw, 304px); /* ABOUT -> CONTACT */
-  --title-font:  clamp(39px, 17.398px + 5.7605vw, 128px);  /* 39 -> 128 */
-  --title-gap:   clamp(9px, -2.165px + 2.9773vw, 55px);    /* linje -> rubrik */
-  --title-tracking: 0.03em;                                 /* 3 % (desktop) */
-  --nav-tracking: 0.04em;                                   /* 4 % */
-  --body-font:   clamp(16px, 14.058px + 0.5178vw, 24px);   /* 16 -> 24 */
-
-  /* Works */
-  --works-top:    clamp(10px, 31.126px - 1.1003vw, 27px);   /* rubrik -> första verket */
-  --works-gap:    140px;                                     /* lika på mobil och desktop */
-  --works-bottom: clamp(70px, 94.854px - 1.2945vw, 90px);
-  --work-w:       clamp(156px, 65.223px + 24.2071vw, 530px);
-  --work-h:       clamp(101px, 38.621px + 16.6343vw, 358px);
-
-  /* Works – öppet case */
-  --case-top:    clamp(294px, 292.058px + 0.5178vw, 302px); /* från fönstrets överkant */
-  --arrow-size:  clamp(24px, 15.990px + 2.1359vw, 57px);
-  --case-blur:   24px;   /* Figma: layer blur 35.5, avstämt visuellt */
-
-  /* About och Contact */
-  --about-top:    clamp(10px, 60.951px - 2.6537vw, 51px);   /* rubrik -> innehåll */
-  --about-pgap:   clamp(15px, 10.388px + 1.2298vw, 34px);   /* mellan stycken */
-  --contact-top:  clamp(36px, 3.961px + 8.5437vw, 168px);   /* rubrik -> text */
-  --contact-pgap: clamp(15px, 2.379px + 3.3657vw, 67px);    /* mellan stycken */
-
-  /* Platshållare (Figma: vit/#b3b3b3 på mobil, #d9d9d9/#797777 på desktop) */
-  --placeholder-list: #ffffff;
-  --placeholder-case: #b3b3b3;
-}
-
-/* Mobil */
-@media (max-width: 767px) {
-  :root {
-    --title-tracking: 0.04em; /* 1.56 px / 39 px i Figma */
-  }
-}
-
-/* Desktop */
-@media (min-width: 768px) {
-  :root {
-    --placeholder-list: #d9d9d9;
-    --placeholder-case: #797777;
-  }
+  --margin: calc(40 * var(--u));
 }
 
 /* --- Reset ------------------------------------------------------------------ */
@@ -123,15 +83,18 @@ html {
 body,
 h1,
 h2,
-h3,
 p,
 ul,
+ol,
+dl,
+dd,
 figure {
   margin: 0;
   padding: 0;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
 }
 
@@ -145,14 +108,30 @@ a {
   text-decoration: none;
 }
 
+address {
+  font-style: normal;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
 /* --- Bas -------------------------------------------------------------------- */
 body {
+  position: relative;
   min-height: 100vh;
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font);
-  font-weight: var(--weight-body);
-  line-height: var(--line-height);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: normal;                  /* Figma: "normal" i textlagren */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -179,7 +158,6 @@ body {
   padding: 8px 12px;
   background: var(--color-text);
   color: var(--color-bg);
-  font-weight: var(--weight-menu);
   transform: translateY(-120%);
 }
 
@@ -187,259 +165,318 @@ body {
   transform: translateY(0);
 }
 
-/* --- Header: meny + linje (Figma: Navigation) ------------------------------- */
-.site-nav {
-  height: var(--nav-height);
-  padding-top: var(--nav-top);
-  border-bottom: 1px solid var(--color-text);
+.placeholder {
+  display: block;
+  background-color: var(--color-placeholder);
 }
 
-.site-nav__list {
-  display: grid;
-  grid-template-columns: var(--nav-col-1) var(--nav-col-2) auto;
-  justify-content: start;
-  padding-left: var(--margin);
-}
-
-.site-nav__link {
-  display: inline-block;
-  font-size: var(--nav-font);
-  font-weight: var(--weight-menu);
-  letter-spacing: var(--nav-tracking);
-  line-height: var(--line-height);
+/* Stor serifrubrik (Visual Archive, Selma Odžačkić, [Not Catalogued] …) */
+.display {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-serif);
+  text-align: center;
   white-space: nowrap;
+}
+
+/* --- Menyrad (Figma: Menu bar) ---------------------------------------------- */
+.site-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: calc(10 * var(--u)) var(--margin);
+  font-size: var(--text-menu);
+  font-weight: 700;
+  letter-spacing: var(--tracking-sans);
+  white-space: nowrap;
+}
+
+.site-header__item {
+  line-height: normal;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
 }
 
-.site-nav__link:hover {
+.site-header__item:hover {
   text-decoration-line: underline;
 }
 
-/* Mobil: aktiv sida visas i 95 Black (Figma: Frame 2) */
-@media (max-width: 767px) {
-  .site-nav__link[aria-current="page"] {
-    font-weight: var(--weight-heading);
-  }
-}
-
-/* --- Sidrubrik (Figma: Page Title) ------------------------------------------ */
-.page-title {
-  margin-top: var(--title-gap);
-  padding-left: var(--margin);
-  font-size: var(--title-font);
-  font-weight: var(--weight-heading);
-  letter-spacing: var(--title-tracking);
-  line-height: var(--line-height);
-  white-space: nowrap;
-}
-
-/* --- Works: lista (Figma: menu 2 / Frame 2) --------------------------------
-   Fyra verk i sicksack. Mobil börjar till vänster, desktop till höger. */
-.works {
-  display: flex;
-  flex-direction: column;
-  gap: var(--works-gap);
-  padding: var(--works-top) var(--margin) var(--works-bottom);
-}
-
-.works__item {
-  align-self: flex-start;
-}
-
-.works__item:nth-child(even) {
-  align-self: flex-end;
-}
-
-@media (min-width: 768px) {
-  .works__item {
-    align-self: flex-end;
-  }
-
-  .works__item:nth-child(even) {
-    align-self: flex-start;
-  }
-}
-
-.works__link {
-  display: block;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.placeholder {
-  display: block;
-}
-
-.works__image {
-  width: var(--work-w);
-  height: var(--work-h);
-  background-color: var(--placeholder-list);
-}
-
-.works__link:hover .works__image {
-  opacity: 0.85;
-}
-
-/* --- Works: öppet case (Figma: menu 3 / Frame 14) ---------------------------
-   Varje case är en popover. När ett case är öppet blir listan suddig
-   (mobil, Frame 14) eller döljs (desktop, menu 3). Menyn och rubriken
-   ligger utanför .works och förblir skarpa. */
-.works {
-  transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-body:has(.case:popover-open) .works {
-  filter: blur(var(--case-blur));
-}
-
-@media (min-width: 768px) {
-  body:has(.case:popover-open) .works {
-    opacity: 0;
-  }
-}
-
-.case {
-  /* Nollställ webbläsarens popover-stil */
-  inset: var(--case-top) var(--margin) auto var(--margin);
-  width: auto;
-  max-height: calc(100dvh - var(--case-top));
+/* --- Navigation (Figma: Menu pressed / Navigation bar) -----------------------
+   Popover i nedre högra hörnet. Bakgrunden tonas med 62 % svart.
+   Esc, klick utanför eller "Menu" igen stänger den. */
+.nav {
+  inset: auto 0 0 auto;
+  width: calc(824 * var(--u));
+  height: calc(776 * var(--u));
+  max-height: 100dvh;
   margin: 0;
-  padding: 0 0 var(--margin);
+  padding: 0 0 0 calc(10 * var(--u));
   border: 0;
+  border-radius: calc(6 * var(--u));
   overflow: auto;
-  background: transparent;
+  background: var(--color-bg);
   color: var(--color-text);
 }
 
-.case::backdrop {
-  background: transparent;
-}
-
-.case__back {
-  display: block;
-  margin: 0 0 4px -2px; /* Figma: pilen 2 px utanför marginalen, bilden 4 px under */
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.case__back img {
-  width: var(--arrow-size);
-  height: var(--arrow-size);
-}
-
-.case__image {
-  width: 100%;
-  aspect-ratio: 335 / 193;
-  background-color: var(--placeholder-case);
-}
-
-.case__text {
-  margin-top: 16px;
-  font-size: var(--body-font);
-}
-
-/* Desktop: pil överst till vänster, text vertikalt centrerad mot bilden */
-@media (min-width: 768px) {
-  .case {
-    right: auto;
-    display: grid;
-    grid-template-columns: max(22.396vw, 240px) 55.365vw; /* 430 + 1063 vid 1920 */
-    column-gap: 1.875vw;                                  /* 36 vid 1920 */
-  }
-
-  .case[popover]:not(:popover-open) {
-    display: none;
-  }
-
-  .case__back {
-    grid-area: 1 / 1;
-    align-self: start;
-    margin: 0;
-  }
-
-  .case__image {
-    grid-area: 1 / 2;
-    margin-top: 0.625vw;                                  /* 12 vid 1920 */
-    aspect-ratio: 1063 / 663;
-  }
-
-  .case__text {
-    grid-area: 1 / 1;
-    align-self: center;
-    margin-top: 0.625vw;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .works {
-    transition: none;
-  }
-}
-
-/* --- About (Figma: menu 4 / Frame 3) ----------------------------------------
-   Mobil: bild centrerad ovanför texten. Desktop: text till vänster,
-   bild till höger, vertikalt centrerade mot varandra. */
-.about {
+.nav:popover-open {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.nav::backdrop {
+  background: var(--color-overlay);
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(30 * var(--u));
+}
+
+.nav__link {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 39px;
-  padding: var(--about-top) var(--margin) var(--works-bottom);
+  padding-right: var(--margin);
+  font-family: var(--font-serif);
+  font-size: var(--text-nav);
+  font-weight: 400;
+  letter-spacing: var(--tracking-serif);
+  white-space: nowrap;
+}
+
+.nav__link:hover,
+.nav__link:active {
+  color: var(--color-pressed);
+}
+
+/* Pricken (Figma: Ellipse 1) visar vilken sida man är på */
+.nav__link[aria-current="page"]::after {
+  content: "";
+  flex-shrink: 0;
+  width: calc(33 * var(--u));
+  height: calc(32 * var(--u));
+  background: url("../img/dot.svg") center / contain no-repeat;
+}
+
+/* --- Startsida (Figma: Landing Page) ---------------------------------------- */
+/* Sidan fyller fönstret. Bilden klipps i nederkant, som i Figma-framen. */
+.home {
+  position: relative;
+  min-height: calc(100dvh - 46 * var(--u));
+  overflow: clip;
+}
+
+.home__image {
+  position: absolute;
+  top: calc(23 * var(--u));             /* 69 från sidans topp − menyraden 46 */
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.home__intro {
+  position: relative;
+  z-index: 1;
+  padding: calc(19 * var(--u)) calc(40.5 * var(--u)) calc(120 * var(--u));
+}
+
+.home__name {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-serif);
+  font-size: var(--text-heading);
+  font-weight: 400;
+  letter-spacing: var(--tracking-serif);
+  white-space: nowrap;
+}
+
+.home__about {
+  width: calc(437 * var(--u));
+  margin-top: calc(20 * var(--u));
+  letter-spacing: var(--tracking-sans);
+}
+
+.home__lead {
+  font-size: var(--text-body);
+}
+
+.home__sub {
+  font-size: var(--text-menu);
+}
+
+.home__based {
+  margin-top: calc(103 * var(--u));
+  font-size: var(--text-menu);
+  font-weight: 600;
+}
+
+.home__contact {
+  position: absolute;
+  z-index: 1;
+  right: var(--margin);
+  bottom: calc(29 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: calc(13 * var(--u));
+  font-size: var(--text-contact);
+  font-weight: 400;
+  letter-spacing: var(--tracking-sans);
+  text-align: right;
+}
+
+/* --- Visual Archive (Figma: Works) -------------------------------------------
+   Fyra verk i sicksack, 668 × 412. Avstånden mellan verken följer Figma. */
+.archive {
+  padding: 0 var(--margin) calc(310 * var(--u));
+}
+
+.archive__title {
+  margin-top: calc(362 * var(--u));
+}
+
+.archive__item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+  width: calc(668 * var(--u));
+}
+
+.archive__item:nth-child(1) { margin-top: calc(216 * var(--u)); }
+.archive__item:nth-child(2) { margin-top: calc(88 * var(--u)); }
+.archive__item:nth-child(3) { margin-top: calc(75 * var(--u)); }
+.archive__item:nth-child(4) { margin-top: calc(77 * var(--u)); }
+
+.archive__item:nth-child(even) {
+  margin-left: auto;
+  text-align: right;
+}
+
+.archive__label {
+  font-family: var(--font-serif);
+  font-size: var(--text-contact);
+  font-weight: 400;
+  letter-spacing: var(--tracking-serif);
+}
+
+.archive__image {
+  width: 100%;
+  height: calc(412 * var(--u));
+}
+
+/* --- About (Figma: About) ------------------------------------------------------
+   Vit introduktion (1024 hög inklusive menyraden) och en grå sektion under. */
+.about__intro {
+  min-height: calc(978 * var(--u));     /* 1024 − menyraden 46 */
+  padding-top: calc(255 * var(--u));
+}
+
+.about__lead {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(24 * var(--u));
+  margin-top: calc(20 * var(--u));
+  padding-right: calc(157 * var(--u));
+  font-size: var(--text-body);
+  letter-spacing: var(--tracking-sans);
+}
+
+.about__lead p {
+  width: calc(552 * var(--u));
+}
+
+.about__down {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.about__down img {
+  width: calc(92 * var(--u));
+  height: calc(92 * var(--u));
+}
+
+.about__more {
+  min-height: calc(1024 * var(--u));
+  padding: calc(25 * var(--u)) 0;
+  background-color: var(--color-band);
+}
+
+.about__row {
+  display: flex;
+  align-items: center;
+  gap: calc(130 * var(--u));
+  padding: 0 var(--margin);
+}
+
+.about__row--end {
+  align-items: flex-end;
+  margin-top: calc(78 * var(--u));      /* 68 + 10 (rubrikens luft) */
+  padding-left: calc(30 * var(--u));
 }
 
 .about__text {
+  flex-shrink: 0;
+  width: calc(438 * var(--u));
+  font-size: var(--text-body);
+  letter-spacing: var(--tracking-sans);
+}
+
+.about__pair {
   display: flex;
-  flex-direction: column;
-  gap: var(--about-pgap);
-  width: 100%;
-  font-size: var(--body-font);
+  align-items: flex-end;
+  gap: calc(14 * var(--u));
 }
 
-.about__image {
-  order: -1;
-  width: 215px;
-  height: 226px;
-  background-color: #d9d9d9;
+.about__image-lg {
+  width: calc(436 * var(--u));
+  height: calc(239 * var(--u));
+  margin: calc(10 * var(--u)) calc(10 * var(--u)) calc(55 * var(--u));
+  background-color: var(--color-placeholder-dark);
 }
 
-@media (min-width: 768px) {
-  .about {
-    flex-direction: row;
-    gap: 10.521vw;                         /* 202 vid 1920 */
-    padding-left: 9.323vw;                 /* 179 vid 1920 */
-  }
-
-  .about__text {
-    width: max(30.781vw, 300px);           /* 591 vid 1920 */
-    flex-shrink: 0;
-  }
-
-  .about__image {
-    order: 0;
-    width: 28.281vw;                       /* 543 vid 1920 */
-    height: auto;
-    aspect-ratio: 543 / 615;
-  }
+.about__image-sm {
+  width: calc(207 * var(--u));
+  height: calc(207 * var(--u));
+  background-color: var(--color-placeholder-darker);
 }
 
-/* --- Contact (Figma: menu 5 / Frame 13) ------------------------------------- */
+.about__subtitle {
+  margin-top: calc(79 * var(--u));      /* 69 + 10 (rubrikens luft) */
+}
+
+/* --- Contact (Figma: Contact) ------------------------------------------------ */
 .contact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--contact-pgap);
-  padding: var(--contact-top) var(--margin) var(--works-bottom);
-  font-size: var(--body-font);
+  padding-bottom: calc(41 * var(--u));
 }
 
-@media (min-width: 768px) {
-  .contact {
-    width: calc(9.323vw + max(30.781vw, 300px)); /* samma textkolumn som About */
-    padding-left: 9.323vw;
-    padding-right: 0;
-  }
+.contact__title {
+  width: calc(979 * var(--u));
+  margin: calc(257 * var(--u)) auto 0;
+  white-space: normal;
+}
+
+.contact__list {
+  display: grid;
+  grid-template-columns: calc(116 * var(--u)) auto;
+  row-gap: calc(20 * var(--u));
+  width: max-content;
+  margin: calc(159 * var(--u)) 0 0 calc(1078 * var(--u));
+  font-size: var(--text-contact);
+  font-weight: 400;
+  letter-spacing: var(--tracking-sans);
+  white-space: nowrap;
+}
+
+/* Länkar i löptext: understrykning vid hover */
+.home__contact a:hover,
+.contact__list a:hover {
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
 }
